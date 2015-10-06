@@ -4,7 +4,9 @@ feature "Create for a future product" do
 
 	context "user is admin"
 		before(:each) do
-			click_button 'Logout'
+
+		    click_button 'Logout'
+
 		    visit 'users/sign_in'
 
 		    fill_in 'user[email]', :with => 'Murat@breakthrough.com'

@@ -3,7 +3,7 @@ require './spec/spec_helper'
 feature "Create for a future print" do		
 
 	before(:each) do
-		click_button 'Logout'
+	    click_button 'Logout'
 	    visit 'users/sign_in'
 
 	    fill_in 'user[email]', :with => 'Murat@breakthrough.com'
