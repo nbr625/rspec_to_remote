@@ -10,7 +10,10 @@ GEM
     childprocess (0.5.6)
       ffi (~> 1.0, >= 1.0.11)
     diff-lcs (1.2.5)
+    faker (1.5.0)
+      i18n (~> 0.5)
     ffi (1.9.10)
+    i18n (0.7.0)
     mime-types (2.6.2)
     mini_portile (0.6.2)
     multi_json (1.11.2)
@@ -48,6 +51,7 @@ PLATFORMS
 
 DEPENDENCIES
   capybara (~> 2.5.0)
+  faker (~> 1.5.0)
   rake
   rspec (~> 3.3.0)
   selenium-webdriver (= 2.47.1)
