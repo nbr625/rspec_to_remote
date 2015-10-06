@@ -1,16 +1,21 @@
 require './spec/spec_helper'
+require 'selenium-webdriver'
 
 feature "Pledge for a future print" do		
 
-	before(:each) do
+	before(:all) do
+		@driver = Selenium::WebDriver.for(:chrome)
+		@driver.navigate.to 'https://artwear.herokuapp.com/'
 		click_button 'Logout'
 	    visit 'users/sign_in'
-
 	    fill_in 'user[email]', :with => 'Murat@breakthrough.com'
-	    fill_in 'user[password]', :with => 'asdfasdf'
-	    
+	    fill_in 'user[password]', :with => 'asdfasdf' 
 	    click_button "Sign in"
-	    visit 'prints/17'
+	    
+	end
+
+	before(:each) do
+		visit 'prints/17'
 	end
 
 	it "I should be allowed to post a review" do
@@ -34,5 +39,9 @@ feature "Pledge for a future print" do
 		click_button 'Create Review'
 		expect(page).to have_content("Comment can\'t be blank")
 	end
+	
+	after(:all) do
+    	@driver.quit
+  	end	
 
 end

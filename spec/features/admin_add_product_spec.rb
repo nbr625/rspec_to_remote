@@ -1,23 +1,25 @@
 require './spec/spec_helper'
+require 'selenium-webdriver'
 
 feature "Create for a future product" do
 
-	context "user is admin"
-		before(:each) do
-
+	context "user is admin" do
+		before(:all) do
+			@driver = Selenium::WebDriver.for(:chrome)
+			@driver.navigate.to 'https://artwear.herokuapp.com/'
 		    click_button 'Logout'
-
 		    visit 'users/sign_in'
-
 		    fill_in 'user[email]', :with => 'Murat@breakthrough.com'
 		    fill_in 'user[password]', :with => 'asdfasdf'	    
 		    click_button "Sign in"
 		    visit 'admin/main'
 			click_button 'Add New Product'
+		end
+
+		before(:each) do
+		    visit 'admin/main'
+			click_button 'Add New Product'			
 		end	
-
-
-		
 
 		it "should redirected me after finalizing pledge" do
 			page.attach_file('Image', 'specs/resources/flare_siren.jpg')
@@ -29,7 +31,6 @@ feature "Create for a future product" do
 		end
 
 		it "should display error if name is left blank" do
-
 			page.attach_file('Image', 'specs/resources/flare_siren.jpg')		
 			fill_in 'product[creator]', :with => 'Nicolas Lovewell'
 			fill_in 'product[description]', :with => 'Most Beautiful Image'
@@ -38,7 +39,6 @@ feature "Create for a future product" do
 		end
 
 		it "should display error if creator is left blank" do
-
 			page.attach_file('Image', 'specs/resources/flare_siren.jpg')
 			fill_in 'product[name]', :with => Faker::Name.name		
 			fill_in 'product[description]', :with => 'Most Beautiful Image'
@@ -48,7 +48,6 @@ feature "Create for a future product" do
 
 
 		it "should display error if creator is left blank" do
-
 			page.attach_file('Image', 'specs/resources/flare_siren.jpg')
 			fill_in 'product[name]', :with => Faker::Name.name	
 			fill_in 'product[creator]', :with => 'Nicolas Lovewell'
@@ -56,7 +55,10 @@ feature "Create for a future product" do
 			expect(page).to have_content("Description can\'t be blank")
 		end
 
-	end
 
+	end
+	after(:all) do
+    	@driver.quit
+  	end	
 
 end

@@ -1,9 +1,11 @@
 require './spec/spec_helper'
+require 'selenium-webdriver'
 
 feature "Create for a future product" do
-
 	
-	before(:each) do
+	before(:all) do
+		@driver = Selenium::WebDriver.for(:chrome)
+		@driver.navigate.to 'https://artwear.herokuapp.com/'
 		click_button 'Logout'
 	    visit 'users/sign_in'
 
@@ -18,4 +20,9 @@ feature "Create for a future product" do
 		click_button "Add to Cart"
 		expect(page).to have_content('2 Items in Cart')
 	end
+
+	after(:all) do
+    	@driver.quit
+  	end
+
 end
