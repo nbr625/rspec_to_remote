@@ -7,9 +7,8 @@ feature "Signing in to ArtWare" do
     @driver.navigate.to 'https://artwear.herokuapp.com/users/sign_in'
   end
 
-
-
   it 'should let user in with a valid account and password' do
+    
     @driver.find_element(:id, 'emailfield').send_keys 'murat@breakthrough.com'
     @driver.find_element(:id, 'passwordfield').send_keys 'asdfasdf'
     @driver.find_element(:id, 'submit').click
@@ -31,7 +30,7 @@ feature "Signing in to ArtWare" do
     @driver.find_element(:id, 'emailfield').send_keys 'invalid@breakthrough.com'
     @driver.find_element(:id, 'passwordfield').send_keys 'asdfasdf'
     @driver.find_element(:id, 'submit').click
-    sleep(inspection_time=3)
+    sleep(inspection_time=)
     alert = @driver.find_element(:id, 'alert').text
     expect(alert).to eq("Invalid email or password.")
   end
