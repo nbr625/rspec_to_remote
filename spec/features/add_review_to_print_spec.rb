@@ -1,47 +1,71 @@
 require './spec/spec_helper'
 require 'selenium-webdriver'
+require 'faker'
 
-feature "Pledge for a future print" do		
+feature "Add reviews" do		
 
 	before(:all) do
-		@driver = Selenium::WebDriver.for(:chrome)
-		@driver.navigate.to 'https://artwear.herokuapp.com/'
-		click_button 'Logout'
-	    visit 'users/sign_in'
-	    fill_in 'user[email]', :with => 'Murat@breakthrough.com'
-	    fill_in 'user[password]', :with => 'asdfasdf' 
-	    click_button "Sign in"
-	    
+		@driver = Selenium::WebDriver.for(:firefox)
+		@driver.navigate.to 'https://artwear.herokuapp.com/users/sign_in'
+		@driver.find_element(:id, 'emailfield').send_keys 'murat@breakthrough.com'
+       	@driver.find_element(:id, 'passwordfield').send_keys 'asdfasdf'
+    	@driver.find_element(:id, 'submit').click
+    	sleep(inspection_time=3)  
 	end
 
-	before(:each) do
-		visit 'prints/17'
+
+	it "should allow user to post review" do
+		@driver.navigate.to 'https://artwear.herokuapp.com/prints/15'
+		@driver.find_element(:id, 'reviewpath').click
+		@driver.navigate.refresh
+		sleep(inspection_time=3)  
+		@driver.find_element(:xpath, '/html/body/div[2]/form/div[1]/img[2]').click
+		comment = Faker::Lorem.paragraph
+		@driver.find_element(:id, 'comment').send_keys comment
+		@driver.find_element(:name, 'commit').click
+		sleep(inspection_time=3) 
+		new_review = @driver.find_element(:xpath, '/html/body/div[2]/div/div/div/div[2]/table[1]/tbody/tr/td[2]').text
+		expect(new_review).to eq(comment)
+		
 	end
 
-	it "I should be allowed to post a review" do
-		click_button 'Review'
-		page.select '3', :from => 'review[rating]'
-		fill_in 'review[comment]', :with => 'I think it could use some improvement'
-		click_button 'Create Review'
-		expect(page).to have_content("I think it could use some improvement")
+	it "should allow user to delete their comment and redirect to print" do
+		@driver.find_element(:xpath, '/html/body/div[2]/div/div/div/div[2]/table[2]/tbody/tr[1]/td[2]/a').click
+		sleep(inspection_time=5)
+		url = @driver.current_url
+		expect(url).to eq("https://artwear.herokuapp.com/prints/15")
 	end
 
-	it "should not allow me to post review if comment is not included" do
-		click_button 'Review'
-		page.select '3', :from => 'review[rating]'		
-		click_button 'Create Review'
-		expect(page).to have_content("Comment can\'t be blank")
+
+
+	it "should should not allow user to post review if comment is missing" do	
+		@driver.find_element(:id, 'reviewpath').click
+		@driver.navigate.refresh
+		sleep(inspection_time=3)  
+		@driver.find_element(:xpath, '/html/body/div[2]/form/div[1]/img[2]').click
+		@driver.find_element(:name, 'commit').click
+		sleep(inspection_time=3) 
+		alert = @driver.find_element(:xpath, '/html/body/div[2]/form/div[1]/ul/li').text
+		expect(alert).to eq("Comment can\'t be blank")
+		
 	end
 
-	it "should not allow me to post review if comment is not included" do
-		click_button 'Review'		
-		fill_in 'review[comment]', :with => 'I think it could use some improvement'
-		click_button 'Create Review'
-		expect(page).to have_content("Comment can\'t be blank")
+	it "should should not allow user to post review if rating is missing" do
+		@driver.navigate.to 'https://artwear.herokuapp.com/prints/15'
+		@driver.find_element(:id, 'reviewpath').click
+		sleep(inspection_time=3)  
+		comment = Faker::Lorem.paragraph
+		@driver.find_element(:id, 'comment').send_keys comment
+		@driver.find_element(:name, 'commit').click
+		sleep(inspection_time=3) 
+		alert = @driver.find_element(:xpath, '/html/body/div[2]/form/div[1]/ul/li').text
+		expect(alert).to eq("Rating can\'t be blank")
 	end
-	
+
+
+
 	after(:all) do
     	@driver.quit
-  	end	
-
+  	end
 end
+

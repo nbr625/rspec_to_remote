@@ -4,32 +4,24 @@ require 'selenium-webdriver'
 feature "Pledge for a future print" do		
 
 	before(:all) do
-		@driver = Selenium::WebDriver.for(:chrome)
-		@driver.navigate.to 'https://artwear.herokuapp.com/'
-		click_button 'Logout'
-		visit 'users/sign_in'
-		fill_in 'user[email]', :with => 'Murat@breakthrough.com'
-		fill_in 'user[password]', :with => 'asdfasdf'		    
-		click_button "Sign in"
+		@driver = Selenium::WebDriver.for(:firefox)
+		@driver.navigate.to 'https://artwear.herokuapp.com/users/sign_in'
+		@driver.find_element(:id, 'emailfield').send_keys 'murat@breakthrough.com'
+       	@driver.find_element(:id, 'passwordfield').send_keys 'asdfasdf'
+    	@driver.find_element(:id, 'submit').click
+    	sleep(inspection_time=3)  
 	end	
 
-	before(:each) do
-		visit 'prints/17'
+
+	it "should allow user to flag print" do
+		@driver.navigate.to 'https://artwear.herokuapp.com/prints/17'
+		@driver.find_element(:id, 'flagpath').click
+		sleep(inspection_time=3)  
+		notice = @driver.find_element(:id, 'notice').text
+		expect(notice).to eq('Print was successfully flagged.')
+		
 	end
 
-	it "shoult redirected me after finalizing pledge" do
-		click_button "Pledge"
-		page.check "I agree"
-		click_button "Support"
-		expect(page).to have_content("All Reviews")
-	end
-
-	it "should not redirect me if checkbox is not is checked" do
-		describe "redirected after finalizing pledge"
-		click_button "Pledge"
-		click_button "Support"
-		expect(page).to have_content("must accept")
-	end
 	after(:all) do
     	@driver.quit
   	end

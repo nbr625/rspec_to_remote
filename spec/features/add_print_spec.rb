@@ -4,17 +4,24 @@ require 'selenium-webdriver'
 feature "Create for a future print" do		
 
 	before(:all) do
-		@driver = Selenium::WebDriver.for(:chrome)
-		@driver.navigate.to 'https://artwear.herokuapp.com/'
-	    click_button 'Logout'
-	    visit 'users/sign_in'
-	    fill_in 'user[email]', :with => 'Murat@breakthrough.com'
-	    fill_in 'user[password]', :with => 'asdfasdf'	    
-	    click_button "Sign in"
+		@driver = Selenium::WebDriver.for(:firefox)
+		@driver.navigate.to 'https://artwear.herokuapp.com/users/sign_in'
+		@driver.find_element(:id, 'emailfield').send_keys 'murat@breakthrough.com'
+       	@driver.find_element(:id, 'passwordfield').send_keys 'asdfasdf'
+    	@driver.find_element(:id, 'submit').click
+    	sleep(inspection_time=3)  
 	end	
 
-	before(:each) do
-		visit 'prints/new'
+	it "should should not allow user to post review if comment is missing" do	
+		@driver.find_element(:id, 'reviewpath').click
+		@driver.navigate.refresh
+		sleep(inspection_time=3)  
+		@driver.find_element(:xpath, '/html/body/div[2]/form/div[1]/img[2]').click
+		@driver.find_element(:name, 'commit').click
+		sleep(inspection_time=3) 
+		alert = @driver.find_element(:xpath, '/html/body/div[2]/form/div[1]/ul/li').text
+		expect(alert).to eq("Comment can\'t be blank")
+		
 	end
 
 	it "should redirected me after finalizing pledge" do
