@@ -30,7 +30,7 @@ feature "Signing in to ArtWare" do
     @driver.find_element(:id, 'emailfield').send_keys 'invalid@breakthrough.com'
     @driver.find_element(:id, 'passwordfield').send_keys 'asdfasdf'
     @driver.find_element(:id, 'submit').click
-    sleep(inspection_time=)
+    sleep(inspection_time=3)
     alert = @driver.find_element(:id, 'alert').text
     expect(alert).to eq("Invalid email or password.")
   end
