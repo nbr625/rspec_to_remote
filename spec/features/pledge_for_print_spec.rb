@@ -1,43 +1,40 @@
 require './spec/spec_helper'
 require 'selenium-webdriver'
+require_relative "../../spec/page_objects/home_page"
+require_relative "../../spec/page_objects/print_page"
+
+
 feature "Pledge for a future print" do		
 
+	app = nil
+
 	before(:all) do
-		@driver = Selenium::WebDriver.for(:firefox)
-		@driver.navigate.to 'https://artwear.herokuapp.com/users/sign_in'
-		@driver.find_element(:id, 'emailfield').send_keys 'murat@breakthrough.com'
-       	@driver.find_element(:id, 'passwordfield').send_keys 'asdfasdf'
-    	@driver.find_element(:id, 'submit').click
-    	sleep(inspection_time=3)  
-	end	
-
-	before(:each) do
-		@driver.navigate.to 'https://artwear.herokuapp.com/prints/17'
+	  	app = AbstractPage.new(Selenium::WebDriver.for(:firefox))
+	  	app.login
 	end
-
+          
+      
 	it "should redirected me after finalizing pledge" do
-
-		@driver.find_element(:id, 'pledgepath').click
-		sleep(inspection_time=3) 
-		@driver.find_element(:id, 'agreement').click
-		@driver.find_element(:id, 'submit').click
-		sleep(inspection_time=3)  
-		all_reviews = @driver.find_element(:id, 'allreviews').text
+		successPledge = app
+			.navigateToPrint
+			.navigateToPledge
+			.checkAgreement
+			.submitPledge
+		all_reviews = successPledge.getAllReviewsText
 		expect(all_reviews).to eq('All Reviews')
-		
 	end
 
 	it "should not redirect me if checkbox is not is checked" do
-		@driver.find_element(:id, 'pledgepath').click
-		sleep(inspection_time=3) 
-		@driver.find_element(:id, 'submit').click
-		sleep(inspection_time=3)  
-		all_reviews = @driver.find_element(:xpath, '/html/body/div[2]/div/div/form/div[1]/li').text
-		expect(all_reviews).to eq('Agreement must accept')
+		pledgeAlert = app
+			.navigateToPrint
+			.navigateToPledge
+			.submitUncheckedPledge
+		alert = pledgeAlert.pledgeAlertText
+		expect(alert).to eq('Agreement must accept')
 	end
 
 	after(:all) do
-	    @driver.quit
+	    app.quit
 	end
 
 end

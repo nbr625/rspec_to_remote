@@ -19,13 +19,13 @@ feature "Signing in to ArtWare" do
       .fillInEmail('murat@breakthrough.com')
       .fillInPassword('asdfasdf')
       .submitSignInForm
-    notice = signInConfirmation.getSignInConfimation
+    notice = signInConfirmation.getNoticeConfimation
     expect(notice).to eq('Signed in successfully.')
   end
 
   it 'should let user logout' do
     logoutConfirmation = app.logoutUser
-    notice = logoutConfirmation.getLogoutConfimation
+    notice = logoutConfirmation.getNoticeConfimation
     expect(notice).to eq('Signed out successfully.')
   end
 
