@@ -1,0 +1,2 @@
+class NewProductPage < AbstractPage
+end

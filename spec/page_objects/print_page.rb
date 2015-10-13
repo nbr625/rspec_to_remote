@@ -1,0 +1,2 @@
+class NewPrintPage < AbstractPage
+end
