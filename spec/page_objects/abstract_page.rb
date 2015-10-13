@@ -33,9 +33,9 @@ class AbstractPage
 
 	def navigateToSignUp
 		@@driver.navigate.to 'https://artwear.herokuapp.com/users/sign_up'
-		sleep(inspection_time=5)
+		sleep(inspection_time=7)
     	@@driver.navigate.refresh
-    	sleep(inspection_time=5)
+    	sleep(inspection_time=7)
     	return SignUpPage.new(@@driver)	
 	end
 
