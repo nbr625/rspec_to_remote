@@ -5,7 +5,7 @@ require_relative "../../spec/page_objects/print_page"
 
 class NewPrintPage < AbstractPage
 
-	# the following file path must be modified in your local environment
+	### the following file path must be modified in your local environment ###
 	def inputImage(img = "/Users/eduardokerese/projects/rspec_to_remote/spec/resources/flare_siren.jpg" )
 		@@driver.find_element(:id, 'print_image').send_keys img
 		return NewPrintPage.new(@@driver)

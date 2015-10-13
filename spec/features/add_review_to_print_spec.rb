@@ -64,7 +64,7 @@ feature "Add reviews" do
 
 
 	after(:all) do
-    	@driver.quit
+    	app.quit
   	end
 
 end
