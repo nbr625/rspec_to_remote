@@ -5,7 +5,7 @@ require_relative "../../spec/page_objects/print_page"
 
 class NewPrintPage < AbstractPage
 
-	### the following file path must be modified in your local environment ###
+	
 	def inputImage(img = (File.absolute_path "./spec/resources/flare_siren.jpg"))
 		@@driver.find_element(:id, 'print_image').send_keys img
 		return NewPrintPage.new(@@driver)
