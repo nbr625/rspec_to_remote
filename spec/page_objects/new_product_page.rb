@@ -20,7 +20,7 @@ class NewProductPage < AbstractPage
 	end
 
 	# file path must be changed to match local environment
-	def inputImage(img = "/Users/eduardokerese/projects/rspec_to_remote/spec/resources/flare_siren.jpg")
+	def inputImage(img = (File.absolute_path "./spec/resources/flare_siren.jpg"))
 		@@driver.find_element(:id, 'image').send_keys img
 		return NewProductPage.new(@@driver)
 	end
