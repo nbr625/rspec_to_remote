@@ -38,6 +38,8 @@ bundle exec rspec --format documentation --out rspec.txt
 For the copy paste enthusiast
 
 #Spec Terminal Commands
+
+
 rspec spec/features/add_print_spec.rb
 
 rspec spec/features/add_review_to_print_spec.rb
