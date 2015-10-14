@@ -29,7 +29,7 @@ feature "Create for a future print" do
 		
 	end
 
-	it "should let user their erase print" do	
+	it "should let user delete their own print" do	
 		notice = app
 			.deletePrint
 			.getNoticeConfimation
@@ -44,7 +44,7 @@ feature "Create for a future print" do
 		expect(url).to eq("https://artwear.herokuapp.com/prints")
 	end
 
-	it "should raise error if name is left black" do	
+	it "should raise error if name is left blank" do	
 		printAlert = app 
 			.navigateToAppRoot
 			.navigateToNewPrint

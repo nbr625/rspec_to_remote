@@ -19,12 +19,14 @@ feature "Signing in to ArtWare" do
       .fillInEmail('murat@breakthrough.com')
       .fillInPassword('asdfasdf')
       .submitSignInForm
+
     notice = signInConfirmation.getNoticeConfimation
     expect(notice).to eq('Signed in successfully.')
   end
 
   it 'should let user logout' do
     logoutConfirmation = app.logoutUser
+
     notice = logoutConfirmation.getNoticeConfimation
     expect(notice).to eq('Signed out successfully.')
   end
@@ -37,6 +39,7 @@ feature "Signing in to ArtWare" do
       .fillInEmail('invalid@breakthrough.com')
       .fillInPassword('asdfasdf')
       .submitInvalidSignInForm
+
     alert = invalidEmailAlert.getInvalidSignInAlert
     expect(alert).to eq("Invalid email or password.")
   end
@@ -48,6 +51,7 @@ feature "Signing in to ArtWare" do
       .fillInEmail('murat@breakthrough.com')
       .fillInPassword('incorrect')
       .submitInvalidSignInForm
+      
     alert = invalidEmailAlert.getInvalidSignInAlert
     expect(alert).to eq("Invalid email or password.")
   end

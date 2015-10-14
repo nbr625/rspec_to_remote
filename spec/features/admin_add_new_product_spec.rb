@@ -30,18 +30,18 @@ feature "Create for a future print" do
 		
 	end
 
-	it "should let admin their erase product" do
+	it "should let admin erase a product" do
 		deleteNotice = app.deleteProduct
 		notice = deleteNotice.getNoticeConfimation
 		expect(notice).to eq("Product was successfully destroyed.")
 	end
 
-	it "should redirect admin to shop after erasing product" do
+	it "should redirect admin to the shop page after erasing product" do
 		url = app.getUrl
 		expect(url).to eq("https://artwear.herokuapp.com/products")
 	end
 
-	it "should raise error if name is left black" do	
+	it "should raise error if name is left blank" do	
 		productAlert = app
 			.navigateToAppRoot
 			.navigateToAdminPage
@@ -54,7 +54,7 @@ feature "Create for a future print" do
 		expect(alert).to eq("Name can\'t be blank")
 	end
 
-	it "should raise error if creator is left black" do
+	it "should raise an error if creator is left blank" do
 		productAlert = app
 			.navigateToAppRoot
 			.navigateToAdminPage
@@ -67,7 +67,7 @@ feature "Create for a future print" do
 		expect(alert).to eq("Creator can\'t be blank")
 	end
 
-	it "should raise error if description is left black" do
+	it "should raise error if description is left blank" do
 		productAlert = app
 			.navigateToAppRoot
 			.navigateToAdminPage

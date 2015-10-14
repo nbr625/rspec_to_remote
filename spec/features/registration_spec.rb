@@ -10,7 +10,7 @@ feature "Sign Up to ArtWare" do
     app = AbstractPage.new(Selenium::WebDriver.for(:firefox))
   end
 
-  it 'should let user sign up with valid credential' do 
+  it 'should let user sign up with valid credentials' do 
     signupNotice = app
       .navigateToSignUp
       .inputEmail
@@ -18,12 +18,14 @@ feature "Sign Up to ArtWare" do
       .inputPwConfirmation("asdfasdf")
       .inputUsername
       .submitSignUpForm
+
     notice = signupNotice.getNoticeConfimation
     expect(notice).to eq('Welcome! You have signed up successfully.')
   end
 
   it 'should let user signout after signup' do
     logoutConfirmation = app.logoutUser
+
     notice = logoutConfirmation.getNoticeConfimation
     expect(notice).to eq('Signed out successfully.')
   end
@@ -36,6 +38,7 @@ feature "Sign Up to ArtWare" do
       .inputPwConfirmation("asdfasdf")
       .inputUsername
       .submitInvalidSignUpForm
+
     alert = signupAlert.getInvalidSignUpAlert
     expect(alert).to eq('Email can\'t be blank')
   end
@@ -49,18 +52,18 @@ feature "Sign Up to ArtWare" do
       .inputPwConfirmation("asdfasdf")
       .inputUsername
       .submitInvalidSignUpForm
+
     alert = signupAlert.getInvalidSignUpAlert
     expect(alert).to eq('Email has already been taken')
   end
 
   it 'should not let user sign up with valid credential without inputting a password' do
-
-
     signupAlert = app
       .navigateToSignUp
       .inputEmail
       .inputUsername
       .submitInvalidSignUpForm
+
     alert = signupAlert.getInvalidSignUpAlert
     expect(alert).to eq('Password can\'t be blank')
   end
@@ -73,6 +76,7 @@ feature "Sign Up to ArtWare" do
       .inputPassword("asdfasdf")
       .inputUsername
       .submitInvalidSignUpForm
+
     alert = signupAlert.getInvalidSignUpAlert
     expect(alert).to eq('Password confirmation doesn\'t match Password')
   end
@@ -86,6 +90,7 @@ feature "Sign Up to ArtWare" do
       .inputPwConfirmation("incorrect")
       .inputUsername
       .submitInvalidSignUpForm
+
     alert = signupAlert.getInvalidSignUpAlert
     expect(alert).to eq("Password confirmation doesn\'t match Password")
   end
@@ -99,6 +104,7 @@ feature "Sign Up to ArtWare" do
       .inputPwConfirmation("asdfasdf")
       .inputUsername("nbr625")
       .submitInvalidSignUpForm
+      
     alert = signupAlert.getInvalidSignUpAlert
     expect(alert).to eq('Username has already been taken')
   end

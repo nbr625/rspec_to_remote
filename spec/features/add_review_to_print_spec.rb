@@ -40,7 +40,7 @@ feature "Add reviews" do
 
 
 
-	it "should should not allow user to post review if comment is missing" do	
+	it "should not allow user to post review if comment is missing" do	
 		reviewMessage = app
 			.navigateToPrint 
 			.navigateToReview
@@ -51,7 +51,7 @@ feature "Add reviews" do
 		expect(alert).to eq("Comment can\'t be blank")		
 	end
 
-	it "should should not allow user to post review if rating is missing" do
+	it "should not allow user to post review if rating is missing" do
 		reviewMessage = app
 			.navigateToPrint 
 			.navigateToReview
