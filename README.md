@@ -39,11 +39,17 @@ For the copy paste enthusiast
 
 #Spec Terminal Commands
 rspec spec/features/add_print_spec.rb
+
 rspec spec/features/add_review_to_print_spec.rb
+
 rspec spec/features/admin_add_new_product_spec.rb
+
 rspec spec/features/flag_print_spec.rb
+
 rspec spec/features/pledge_for_print_spec.rb
+
 rspec spec/features/registration_spec.rb
+
 rspec spec/features/sign_in_spec.rb
 
 Happy testing!
