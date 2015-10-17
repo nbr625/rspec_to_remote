@@ -4,16 +4,16 @@ require 'selenium-webdriver'
 require 'appium_lib'
 require_relative "../../spec/page_objects/home_page"
 
-@@environments.each do |env, value|
+@environments.each do |env|
 
   feature "Signing in to ArtWare" do
 
     app = nil
 
-    if env[:type] == "personal_comp"
+    if env[:type] == "computer"
 
       before(:all) do
-        app = AbstractPage.new(Selenium::WebDriver.for(("#{env[:browser]}").to_sym)
+        app = AbstractPage.new(Selenium::WebDriver.for(("#{env[:browser]}").to_sym))
       end
 
     elsif env[:type] == "mobile"
@@ -27,7 +27,7 @@ require_relative "../../spec/page_objects/home_page"
 
 
 
-    it 'In #{env[platform]} app should let user in with a valid account and password' "#(env[:name]}".to_sym do
+    it "In #{env[:platform]} app should let user in with a valid account and password", "#{env[:name]}".to_sym do
       signInConfirmation = app
         .navigateToAppRoot
         .navigateToSignIn
@@ -39,7 +39,7 @@ require_relative "../../spec/page_objects/home_page"
       expect(notice).to eq('Signed in successfully.')
     end
 
-    it 'In #{env.platform} app should let user logout' do
+    it "In #{env[:platform]} app should let user logout" do
       logoutConfirmation = app.logoutUser
 
       notice = logoutConfirmation.getNoticeConfimation
@@ -47,7 +47,7 @@ require_relative "../../spec/page_objects/home_page"
     end
 
 
-    it 'In #{env.platform} app should not let use in with an invalid account' "#(env[:name]}".to_sym do
+    it "In #{env[:platform]} app should not let use in with an invalid account", "#{env[:name]}".to_sym do
       invalidEmailAlert = app
         .navigateToAppRoot
         .navigateToSignIn
@@ -59,7 +59,7 @@ require_relative "../../spec/page_objects/home_page"
       expect(alert).to eq("Invalid email or password.")
     end
 
-    it 'In #{env.platform} app should not let user in with an invalid password' "#(env[:name]}".to_sym do
+    it "In #{env[:platform]} app should not let user in with an invalid password", "#{env[:name]}".to_sym do
       invalidEmailAlert = app
         .navigateToAppRoot
         .navigateToSignIn
