@@ -6,7 +6,7 @@ This is a blackbox testing framework for Artware.com an artist community/shop we
 All tests are integrated in a Page Object Pattern; if one of the xpath's or id's change,
 the developer only has to change that value once in the whole framework.
 
-Moreover, it is fully integrated with Appium mobile functionality for andriod and ios. These tests are dynamically created through one single spec file. The user has the option to filter all other platforms by passing the tag corresponding to each set of tests.
+Moreover, it is fully integrated with Appium mobile functionality for andriod and ios. These tests are dynamically created through one single spec file. The user has the option to filter all other platforms by passing the tag corresponding to each set of tests. Please make any pertinent changes to the Android/IOS in the environment.rb file to fit your emulator specs.
 
 
 #Caveat:

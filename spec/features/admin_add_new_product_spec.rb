@@ -96,5 +96,6 @@ require_relative "../../spec/page_objects/abstract_page"
 		after(:all) do
 			app.quit
 		end
+	end
 
 end
