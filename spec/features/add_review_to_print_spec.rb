@@ -1,5 +1,8 @@
 require './spec/spec_helper'
+require './spec/environments'
 require 'selenium-webdriver'
+require 'appium_lib'
+require 'faker'
 
 require_relative "../../spec/page_objects/home_page"
 require_relative "../../spec/page_objects/abstract_page"
@@ -15,7 +18,7 @@ feature "Add reviews" do
 	end
 
 
-	it "should allow user to post review" do
+	it "In #{env[:platform]} should allow user to post review" do
 		comment = Faker::Lorem.paragraph
 		newReview = app
 			.navigateToPrint 
@@ -30,7 +33,7 @@ feature "Add reviews" do
 	end
 
 
-	it "should allow user to delete their comment and redirect to print" do
+	it "In #{env[:platform]} should allow user to delete their comment and redirect to print", "#{env[:name]}".to_sym do
 		url = app
 			.deleteReview
 			.getUrl
@@ -40,7 +43,7 @@ feature "Add reviews" do
 
 
 
-	it "should not allow user to post review if comment is missing" do	
+	it "In #{env[:platform]} should not allow user to post review if comment is missing", "#{env[:name]}".to_sym do	
 		reviewMessage = app
 			.navigateToPrint 
 			.navigateToReview
@@ -51,7 +54,7 @@ feature "Add reviews" do
 		expect(alert).to eq("Comment can\'t be blank")		
 	end
 
-	it "should not allow user to post review if rating is missing" do
+	it "In #{env[:platform]} should not allow user to post review if rating is missing", "#{env[:name]}".to_sym do
 		reviewMessage = app
 			.navigateToPrint 
 			.navigateToReview
