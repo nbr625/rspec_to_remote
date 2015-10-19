@@ -27,7 +27,7 @@ require_relative "../../spec/page_objects/home_page"
 
     end
 
-    it "In #{env[:platform]} should let user sign up with valid credentials", "#{env[:name]}".to_sym do 
+    it "In #{env[:platform]} should let user sign up with valid credentials", "#{env[:tag]}".to_sym do 
       signupNotice = app
         .navigateToSignUp
         .inputEmail
@@ -40,7 +40,7 @@ require_relative "../../spec/page_objects/home_page"
       expect(notice).to eq('Welcome! You have signed up successfully.')
     end
 
-    it "In #{env[:platform]} should let user signout after signup", "#{env[:name]}".to_sym do
+    it "In #{env[:platform]} should let user signout after signup", "#{env[:tag]}".to_sym do
       logoutConfirmation = app.logoutUser
 
       notice = logoutConfirmation.getNoticeConfimation
@@ -48,7 +48,7 @@ require_relative "../../spec/page_objects/home_page"
     end
 
 
-    it "In #{env[:platform]} should not let user sign up without inputing an email", "#{env[:name]}".to_sym do 
+    it "In #{env[:platform]} should not let user sign up without inputing an email", "#{env[:tag]}".to_sym do 
       signupAlert = app
         .navigateToSignUp
         .inputPassword("asdfasdf")
@@ -60,7 +60,7 @@ require_relative "../../spec/page_objects/home_page"
       expect(alert).to eq('Email can\'t be blank')
     end
 
-    it "In #{env[:platform]} should not let user sign up if email is taken", "#{env[:name]}".to_sym do 
+    it "In #{env[:platform]} should not let user sign up if email is taken", "#{env[:tag]}".to_sym do 
 
       signupAlert = app
         .navigateToSignUp
@@ -74,7 +74,7 @@ require_relative "../../spec/page_objects/home_page"
       expect(alert).to eq('Email has already been taken')
     end
 
-    it "In #{env[:platform]} should not let user sign up with valid credential without inputting a password", "#{env[:name]}".to_sym do
+    it "In #{env[:platform]} should not let user sign up with valid credential without inputting a password", "#{env[:tag]}".to_sym do
       signupAlert = app
         .navigateToSignUp
         .inputEmail
@@ -85,7 +85,7 @@ require_relative "../../spec/page_objects/home_page"
       expect(alert).to eq('Password can\'t be blank')
     end
 
-    it "In #{env[:platform]} should not let user sign up without inputing a password confirmation", "#{env[:name]}".to_sym do  
+    it "In #{env[:platform]} should not let user sign up without inputing a password confirmation", "#{env[:tag]}".to_sym do  
 
       signupAlert = app
         .navigateToSignUp
@@ -98,7 +98,7 @@ require_relative "../../spec/page_objects/home_page"
       expect(alert).to eq('Password confirmation doesn\'t match Password')
     end
 
-    it "In #{env[:platform]} should not let user sign up if password confimation does not match", "#{env[:name]}".to_sym do  
+    it "In #{env[:platform]} should not let user sign up if password confimation does not match", "#{env[:tag]}".to_sym do  
 
       signupAlert = app
         .navigateToSignUp
@@ -112,7 +112,7 @@ require_relative "../../spec/page_objects/home_page"
       expect(alert).to eq("Password confirmation doesn\'t match Password")
     end
 
-    it "In #{env[:platform]} should not let user sign up if username is taken", "#{env[:name]}".to_sym do  
+    it "In #{env[:platform]} should not let user sign up if username is taken", "#{env[:tag]}".to_sym do  
 
       signupAlert = app
         .navigateToSignUp

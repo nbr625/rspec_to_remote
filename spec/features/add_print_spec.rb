@@ -28,7 +28,7 @@ require_relative "../../spec/page_objects/abstract_page"
 
     	end
 
-		it "In #{env[:platform]} should create a print" do
+		it "In #{env[:platform]} should create a print", "#{env[:tag]}".to_sym do
 			print_title = Faker::Lorem.word
 			printTitle = app 
 				.navigateToAppRoot
@@ -43,7 +43,7 @@ require_relative "../../spec/page_objects/abstract_page"
 			
 		end
 
-		it "In #{env[:platform]} should let user delete their own print", "#{env[:name]}".to_sym do	
+		it "In #{env[:platform]} should let user delete their own print", "#{env[:tag]}".to_sym do	
 			notice = app
 				.deletePrint
 				.getNoticeConfimation
@@ -51,14 +51,14 @@ require_relative "../../spec/page_objects/abstract_page"
 			expect(notice).to eq("Print was successfully destroyed.")
 		end
 
-		it "In #{env[:platform]} should redirect user to print index after erasing", "#{env[:name]}".to_sym do
+		it "In #{env[:platform]} should redirect user to print index after erasing", "#{env[:tag]}".to_sym do
 			url = app
 				.getUrl
 
 			expect(url).to eq("https://artwear.herokuapp.com/prints")
 		end
 
-		it "In #{env[:platform]} should raise error if name is left blank", "#{env[:name]}".to_sym do	
+		it "In #{env[:platform]} should raise error if name is left blank", "#{env[:tag]}".to_sym do	
 			printAlert = app 
 				.navigateToAppRoot
 				.navigateToNewPrint
@@ -69,7 +69,7 @@ require_relative "../../spec/page_objects/abstract_page"
 			expect(alert).to eq("Name can't be blank")
 		end
 
-		it "In #{env[:platform]} should raise error if description is left black", "#{env[:name]}".to_sym do
+		it "In #{env[:platform]} should raise error if description is left black", "#{env[:tag]}".to_sym do
 			printAlert = app 
 				.navigateToAppRoot
 				.navigateToNewPrint

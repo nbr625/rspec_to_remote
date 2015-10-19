@@ -28,7 +28,7 @@ require_relative "../../spec/page_objects/print_page"
     	end
 
 
-		it "In #{env[:platform]} should allow user to flag print", "#{env[:name]}".to_sym do
+		it "In #{env[:platform]} should allow user to flag print", "#{env[:tag]}".to_sym do
 			app
 				.navigateToPrint
 				.flagPrint 

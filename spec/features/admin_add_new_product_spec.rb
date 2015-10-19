@@ -44,7 +44,7 @@ require_relative "../../spec/page_objects/abstract_page"
 			
 		end
 
-		it "In #{env[:platform]} should let admin erase a product", "#{env[:name]}".to_sym do
+		it "In #{env[:platform]} should let admin erase a product", "#{env[:tag]}".to_sym do
 			deleteNotice = app.deleteProduct
 			notice = deleteNotice.getNoticeConfimation
 			expect(notice).to eq("Product was successfully destroyed.")
@@ -55,7 +55,7 @@ require_relative "../../spec/page_objects/abstract_page"
 			expect(url).to eq("https://artwear.herokuapp.com/products")
 		end
 
-		it "In #{env[:platform]} should raise error if name is left blank", "#{env[:name]}".to_sym do	
+		it "In #{env[:platform]} should raise error if name is left blank", "#{env[:tag]}".to_sym do	
 			productAlert = app
 				.navigateToAppRoot
 				.navigateToAdminPage
@@ -68,7 +68,7 @@ require_relative "../../spec/page_objects/abstract_page"
 			expect(alert).to eq("Name can\'t be blank")
 		end
 
-		it "In #{env[:platform]} should raise an error if creator is left blank", "#{env[:name]}".to_sym do
+		it "In #{env[:platform]} should raise an error if creator is left blank", "#{env[:tag]}".to_sym do
 			productAlert = app
 				.navigateToAppRoot
 				.navigateToAdminPage
@@ -81,7 +81,7 @@ require_relative "../../spec/page_objects/abstract_page"
 			expect(alert).to eq("Creator can\'t be blank")
 		end
 
-		it "In #{env[:platform]} should raise error if description is left blank", "#{env[:name]}".to_sym do
+		it "In #{env[:platform]} should raise error if description is left blank", "#{env[:tag]}".to_sym do
 			productAlert = app
 				.navigateToAppRoot
 				.navigateToAdminPage

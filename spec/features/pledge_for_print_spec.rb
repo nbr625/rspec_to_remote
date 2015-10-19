@@ -27,7 +27,7 @@ require_relative "../../spec/page_objects/print_page"
     	end
           
       
-		it "In #{env[:platform]} should redirected me after finalizing pledge", "#{env[:name]}".to_sym do
+		it "In #{env[:platform]} should redirected me after finalizing pledge", "#{env[:tag]}".to_sym do
 			successPledge = app
 				.navigateToPrint
 				.navigateToPledge
@@ -37,7 +37,7 @@ require_relative "../../spec/page_objects/print_page"
 			expect(all_reviews).to eq('All Reviews')
 		end
 
-		it "In #{env[:platform]} should not redirect me if checkbox is not is checked", "#{env[:name]}".to_sym do
+		it "In #{env[:platform]} should not redirect me if checkbox is not is checked", "#{env[:tag]}".to_sym do
 			pledgeAlert = app
 				.navigateToPrint
 				.navigateToPledge

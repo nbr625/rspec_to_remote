@@ -4,7 +4,7 @@
 		browser: "firefox",
 		platform: "desktop",
 		type: "computer",
-		tag: ":ff_d" 
+		tag: "deskt" 
 	},
 
 	
@@ -12,7 +12,7 @@
 		browser: "browser",
 		platform: "andriod",
 		type: "mobile",
-		tag: ":b_andr",
+		tag: "andr",
 		desired_caps: {
 			caps: {
 				platformName: 'Android',
@@ -28,7 +28,7 @@
 		browser: "safari",
 		platform: "ios",
 		type: "mobile",
-		tag: ":saf_ios",
+		tag: "ios",
 		desired_caps: {
 			caps: {  
 			    platformName: 'iOS',  

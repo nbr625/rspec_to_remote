@@ -30,7 +30,7 @@ require_relative "../../spec/page_objects/print_page"
     	end
 
 
-		it "In #{env[:platform]} should allow user to post review" do
+		it "In #{env[:platform]} should allow user to post review", "#{env[:tag]}".to_sym do
 			comment = Faker::Lorem.paragraph
 			newReview = app
 				.navigateToPrint 
@@ -45,7 +45,7 @@ require_relative "../../spec/page_objects/print_page"
 		end
 
 
-		it "In #{env[:platform]} should allow user to delete their comment and redirect to print", "#{env[:name]}".to_sym do
+		it "In #{env[:platform]} should allow user to delete their comment and redirect to print", "#{env[:tag]}".to_sym do
 			url = app
 				.deleteReview
 				.getUrl
@@ -55,7 +55,7 @@ require_relative "../../spec/page_objects/print_page"
 
 
 
-		it "In #{env[:platform]} should not allow user to post review if comment is missing", "#{env[:name]}".to_sym do	
+		it "In #{env[:platform]} should not allow user to post review if comment is missing", "#{env[:tag]}".to_sym do	
 			reviewMessage = app
 				.navigateToPrint 
 				.navigateToReview
@@ -66,7 +66,7 @@ require_relative "../../spec/page_objects/print_page"
 			expect(alert).to eq("Comment can\'t be blank")		
 		end
 
-		it "In #{env[:platform]} should not allow user to post review if rating is missing", "#{env[:name]}".to_sym do
+		it "In #{env[:platform]} should not allow user to post review if rating is missing", "#{env[:tag]}".to_sym do
 			reviewMessage = app
 				.navigateToPrint 
 				.navigateToReview

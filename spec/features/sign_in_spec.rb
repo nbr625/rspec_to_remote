@@ -27,7 +27,7 @@ require_relative "../../spec/page_objects/home_page"
 
 
 
-    it "In #{env[:platform]} app should let user in with a valid account and password", "#{env[:name]}".to_sym do
+    it "In #{env[:platform]} app should let user in with a valid account and password", "#{env[:tag]}".to_sym do
       signInConfirmation = app
         .navigateToAppRoot
         .navigateToSignIn
@@ -47,7 +47,7 @@ require_relative "../../spec/page_objects/home_page"
     end
 
 
-    it "In #{env[:platform]} app should not let use in with an invalid account", "#{env[:name]}".to_sym do
+    it "In #{env[:platform]} app should not let use in with an invalid account", "#{env[:tag]}".to_sym do
       invalidEmailAlert = app
         .navigateToAppRoot
         .navigateToSignIn
@@ -59,7 +59,7 @@ require_relative "../../spec/page_objects/home_page"
       expect(alert).to eq("Invalid email or password.")
     end
 
-    it "In #{env[:platform]} app should not let user in with an invalid password", "#{env[:name]}".to_sym do
+    it "In #{env[:platform]} app should not let user in with an invalid password", "#{env[:tag]}".to_sym do
       invalidEmailAlert = app
         .navigateToAppRoot
         .navigateToSignIn
