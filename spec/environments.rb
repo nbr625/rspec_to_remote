@@ -8,7 +8,7 @@
 	},
 
 	
-	ios = {
+	android = {
 		browser: "browser",
 		platform: "andriod",
 		type: "mobile",
@@ -24,7 +24,7 @@
 
 	},
 
-	andriod = {
+	ios = {
 		browser: "safari",
 		platform: "ios",
 		type: "mobile",
