@@ -24,8 +24,8 @@ require_relative "../../spec/page_objects/print_page"
     	elsif env[:type] == "mobile"
 
       		before(:all) do
-        		appium_driver = Appium::Driver.new(env[:desired_caps])
-        		app = appium_driver.start_driver
+        		app = Appium::Driver.new(env[:desired_caps]).start_driver
+        		Appium.promote_appium_methods Object
         		app.login
       		end
 
