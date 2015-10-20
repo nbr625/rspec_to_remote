@@ -16,6 +16,7 @@ require_relative "../../spec/page_objects/print_page"
 
       		before(:all) do
         		app = AbstractPage.new(Selenium::WebDriver.for(("#{env[:browser]}").to_sym))
+        		app.login
       		end
 
     	elsif env[:type] == "mobile"
@@ -23,6 +24,7 @@ require_relative "../../spec/page_objects/print_page"
       		before(:all) do
         		appium_driver = Appium::Driver.new(env[:desired_caps])
         		app = appium_driver.start_driver
+        		app.login
       		end
 
     	end
